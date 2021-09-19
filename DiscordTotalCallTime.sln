@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordTotalCallTime", "DiscordTotalCallTime\DiscordTotalCallTime.csproj", "{21433C77-5030-4EA8-A32B-B9C7D6152130}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21433C77-5030-4EA8-A32B-B9C7D6152130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21433C77-5030-4EA8-A32B-B9C7D6152130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21433C77-5030-4EA8-A32B-B9C7D6152130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21433C77-5030-4EA8-A32B-B9C7D6152130}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {380495A4-EBD6-49BC-AB88-70EF984D16B4}
+	EndGlobalSection
+EndGlobal
