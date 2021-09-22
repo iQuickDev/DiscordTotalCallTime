@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net.Http;
 using System.IO;
+using System.Threading;
 
 namespace DiscordTotalCallTime
 {
@@ -35,12 +36,68 @@ namespace DiscordTotalCallTime
             dragPanel.MouseUp += msUp;
             closeBtn.Click += close;
             confirmBtn.Click += confirm;
+            importJSON.Click += ImportJson;
         }
 
         int iterations = 0;
         double callTime = 0, averageCallTime = 0;
         String token, chatId;
 
+        // a lot of this code has been written by https://github.com/randomcmd, sincerely, thank you.
+
+        private void ImportJson(object sender, EventArgs e)
+        {
+            jsonFileBrowser.ShowDialog();
+            //new Thread(() =>
+            //{
+                try
+                {
+                    using (StreamReader file = File.OpenText(jsonFileBrowser.FileName))
+                    using (JsonTextReader reader = new JsonTextReader(file))
+                    {
+                        JObject o = (JObject)JToken.ReadFrom(reader);
+
+                        foreach (var message in o["messages"])
+                        {
+                            if (message["type"].ToString() == "Call")
+                            {
+                                try
+                                {
+                                    if (message["timestamp"].ToString() != "null" && message["callEndedTimestamp"].ToString() != null)
+                                    {
+                                        // Getting both timestamps of call beginning and call end
+                                        String timestamp = message["timestamp"].ToString();
+                                        String timestampEnd = message["callEndedTimestamp"].ToString();
+
+                                        // Converting timestamps to DateTime
+                                        DateTime start = DateTime.Parse(timestamp);
+                                        DateTime end = DateTime.Parse(timestampEnd);
+
+                                        // Calculating the timespan between call start and end and saving it as a timespan object
+                                        TimeSpan duration = end - start;
+
+                                        averageCallTime += duration.TotalSeconds;
+                                        iterations++;
+                                        // Getting the total duration in seconds and adding it to the global total call time
+                                        callTime += duration.TotalSeconds;
+                                    }
+                                }
+                                catch
+                                {
+                                    // This code is unreachable but it's here for the memes https://www.youtube.com/watch?v=2gQl3JDz0dM
+                                }
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("The selected file cannot be read");
+                }
+            //});
+            operationProgress.Value = 90;
+            UpdateGUI();
+        }
 
         async private void confirm(object sender, EventArgs e)
         {
@@ -133,6 +190,11 @@ namespace DiscordTotalCallTime
                 }
             }
             operationProgress.Value = 90;
+            UpdateGUI();
+        }
+
+        private void UpdateGUI()
+        {
             var days = (int)callTime / 60 / 60 / 24;
             var hours = (int)callTime / 60 / 60 % 24;
             var minutes = (int)callTime / 60 % 60;
@@ -150,6 +212,8 @@ namespace DiscordTotalCallTime
             operationProgress.Value = 100;
 
             callTime = 0;
+            averageCallTime = 0;
+            iterations = 0;
         }
 
         private void close(object sender, EventArgs e)
