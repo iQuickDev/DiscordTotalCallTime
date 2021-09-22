@@ -29,11 +29,12 @@ namespace DiscordTotalCallTime
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.dragPanel = new System.Windows.Forms.Panel();
+            this.softwareIcon = new System.Windows.Forms.PictureBox();
             this.closeBtn = new Guna.UI2.WinForms.Guna2CircleButton();
             this.tokenField = new Guna.UI2.WinForms.Guna2TextBox();
             this.chatIdField = new Guna.UI2.WinForms.Guna2TextBox();
@@ -48,14 +49,13 @@ namespace DiscordTotalCallTime
             this.calls = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.operationProgress = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.importJSON = new Guna.UI2.WinForms.Guna2Button();
-            this.softwareIcon = new System.Windows.Forms.PictureBox();
             this.trustLabel = new System.Windows.Forms.Label();
             this.dragPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.softwareIcon)).BeginInit();
             this.totalCallTimeContainer.SuspendLayout();
             this.avgCallTimeContainer.SuspendLayout();
             this.startedCallsContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.startedCalls)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.softwareIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // dragPanel
@@ -67,6 +67,16 @@ namespace DiscordTotalCallTime
             this.dragPanel.Name = "dragPanel";
             this.dragPanel.Size = new System.Drawing.Size(600, 30);
             this.dragPanel.TabIndex = 0;
+            // 
+            // softwareIcon
+            // 
+            this.softwareIcon.Image = ((System.Drawing.Image)(resources.GetObject("softwareIcon.Image")));
+            this.softwareIcon.Location = new System.Drawing.Point(285, 0);
+            this.softwareIcon.Name = "softwareIcon";
+            this.softwareIcon.Size = new System.Drawing.Size(30, 30);
+            this.softwareIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.softwareIcon.TabIndex = 10;
+            this.softwareIcon.TabStop = false;
             // 
             // closeBtn
             // 
@@ -103,6 +113,7 @@ namespace DiscordTotalCallTime
             this.tokenField.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tokenField.FocusedState.Parent = this.tokenField;
             this.tokenField.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tokenField.ForeColor = System.Drawing.Color.White;
             this.tokenField.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tokenField.HoverState.Parent = this.tokenField;
             this.tokenField.Location = new System.Drawing.Point(13, 53);
@@ -130,6 +141,7 @@ namespace DiscordTotalCallTime
             this.chatIdField.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.chatIdField.FocusedState.Parent = this.chatIdField;
             this.chatIdField.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chatIdField.ForeColor = System.Drawing.Color.White;
             this.chatIdField.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.chatIdField.HoverState.Parent = this.chatIdField;
             this.chatIdField.Location = new System.Drawing.Point(344, 53);
@@ -191,12 +203,13 @@ namespace DiscordTotalCallTime
             // totalCallTime
             // 
             this.totalCallTime.AutoSize = true;
-            this.totalCallTime.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
-            this.totalCallTime.Location = new System.Drawing.Point(13, 37);
+            this.totalCallTime.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
+            this.totalCallTime.Location = new System.Drawing.Point(30, 41);
             this.totalCallTime.Name = "totalCallTime";
-            this.totalCallTime.Size = new System.Drawing.Size(349, 28);
+            this.totalCallTime.Size = new System.Drawing.Size(310, 25);
             this.totalCallTime.TabIndex = 1;
             this.totalCallTime.Text = "0 days 0 hours 0 minutes 0 seconds";
+            this.totalCallTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // avgCallTimeContainer
             // 
@@ -223,11 +236,12 @@ namespace DiscordTotalCallTime
             // 
             this.avgCallTime.AutoSize = true;
             this.avgCallTime.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.avgCallTime.Location = new System.Drawing.Point(14, 43);
+            this.avgCallTime.Location = new System.Drawing.Point(38, 44);
             this.avgCallTime.Name = "avgCallTime";
-            this.avgCallTime.Size = new System.Drawing.Size(242, 19);
+            this.avgCallTime.Size = new System.Drawing.Size(195, 19);
             this.avgCallTime.TabIndex = 1;
-            this.avgCallTime.Text = "0 days 0 hours 0 minutes 0 seconds";
+            this.avgCallTime.Text = "0 hours 0 minutes 0 seconds";
+            this.avgCallTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // startedCallsContainer
             // 
@@ -369,16 +383,6 @@ namespace DiscordTotalCallTime
             this.importJSON.Text = "Import JSON";
             this.importJSON.UseTransparentBackground = true;
             // 
-            // softwareIcon
-            // 
-            this.softwareIcon.Image = ((System.Drawing.Image)(resources.GetObject("softwareIcon.Image")));
-            this.softwareIcon.Location = new System.Drawing.Point(285, 0);
-            this.softwareIcon.Name = "softwareIcon";
-            this.softwareIcon.Size = new System.Drawing.Size(30, 30);
-            this.softwareIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.softwareIcon.TabIndex = 10;
-            this.softwareIcon.TabStop = false;
-            // 
             // trustLabel
             // 
             this.trustLabel.AutoSize = true;
@@ -397,7 +401,6 @@ namespace DiscordTotalCallTime
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(57)))), ((int)(((byte)(63)))));
             this.ClientSize = new System.Drawing.Size(600, 350);
             this.Controls.Add(this.trustLabel);
-            this.Controls.Add(this.operationProgress);
             this.Controls.Add(this.importJSON);
             this.Controls.Add(this.startedCallsContainer);
             this.Controls.Add(this.avgCallTimeContainer);
@@ -406,19 +409,20 @@ namespace DiscordTotalCallTime
             this.Controls.Add(this.tokenField);
             this.Controls.Add(this.dragPanel);
             this.Controls.Add(this.confirmBtn);
+            this.Controls.Add(this.operationProgress);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "DiscordTotalCallTime";
             this.dragPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.softwareIcon)).EndInit();
             this.totalCallTimeContainer.ResumeLayout(false);
             this.totalCallTimeContainer.PerformLayout();
             this.avgCallTimeContainer.ResumeLayout(false);
             this.avgCallTimeContainer.PerformLayout();
             this.startedCallsContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.startedCalls)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.softwareIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
