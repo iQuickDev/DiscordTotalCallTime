@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +24,7 @@ namespace DiscordTotalCallTime
                 {
                     JObject o = (JObject)JToken.ReadFrom(reader);
 
-                    double callTime = 0, iterations = 0 , averageCallTime = 0;
+                    double callTime = 0, iterations = 0, averageCallTime = 0;
 
                     foreach (var message in o["messages"])
                     {
@@ -51,7 +50,7 @@ namespace DiscordTotalCallTime
                                     // Getting the total duration in seconds and adding it to the global total call time
                                     callTime += duration.TotalSeconds;
 
-                                    
+
                                 }
                             }
                             catch
@@ -65,50 +64,17 @@ namespace DiscordTotalCallTime
             }
             catch
             {
-                
+
             }
-            
+
             return null;
 
         }
 
-        public async static Task ExportDiscordChatFromID(String ID, String token, Guna.UI2.WinForms.Guna2CircleProgressBar operationProgress)
+        public async static Task ExportDiscordChatFromID(String ID, String token, bool showOutput, Guna.UI2.WinForms.Guna2CircleProgressBar operationProgress)
         {
             try
             {
-                var url = "https://discordapp.com/api/users/@me/channels";
-                JArray channels;
-                var httpRequest = (HttpWebRequest)WebRequest.Create(url);
-                httpRequest.Headers["Authorization"] = token;
-                var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
-                operationProgress.Value = 15;
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                using (JsonTextReader reader = new JsonTextReader(streamReader))
-
-                    channels = (JArray)JToken.ReadFrom(reader);
-
-                Dictionary<string, string> channelDictionary = new Dictionary<string, string>();
-                operationProgress.Value = 30;
-                foreach (var channelX in channels)
-                {
-                    if (channelX["type"].ToString() == "1")
-                    {
-                        channelDictionary.Add(channelX["id"].ToString(), channelX["recipients"][0]["username"].ToString());
-                    }
-                    else
-                    {
-                        String groupName = ">>";
-
-                        foreach (var recipient in channelX["recipients"])
-                        {
-                            groupName += $"{recipient["username"]}, ";
-                        }
-
-                        groupName = groupName.Substring(0, groupName.Length - 2);
-
-                        channelDictionary.Add(channelX["id"].ToString(), channelX["name"].ToString());
-                    }
-                }
                 operationProgress.Value = 50;
                 String arguments = $"DiscordChatExporter.Cli.dll export -t {token} -c {ID} -f Json -o messages.json";
                 String workingDir = Directory.GetCurrentDirectory();
@@ -127,14 +93,109 @@ namespace DiscordTotalCallTime
                 var stdOut = stdOutBuffer.ToString();
                 var stdErr = stdErrBuffer.ToString();
 
-                MessageBox.Show(stdOut);
-                MessageBox.Show(stdErr);
+                if (showOutput) { 
+                    MessageBox.Show(stdOut);
+                    MessageBox.Show(stdErr);
+                }
 
                 operationProgress.Value = 60;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                
+
+            }
+        }
+
+        public async static Task<ArrayList[]> GetChannelIDs(String token)
+        {
+            try
+            {
+                var url = "https://discordapp.com/api/users/@me/channels";
+                JArray channels;
+                var httpRequest = (HttpWebRequest)WebRequest.Create(url);
+                httpRequest.Headers["Authorization"] = token;
+                var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                using (JsonTextReader reader = new JsonTextReader(streamReader))
+
+                    channels = (JArray)JToken.ReadFrom(reader);
+
+                ArrayList ids = new ArrayList();
+                ArrayList names = new ArrayList();
+
+                foreach (var channelX in channels)
+                {
+                    if (channelX["type"].ToString() == "1")
+                    {
+                        ids.Add(channelX["id"].ToString());
+                        names.Add(channelX["recipients"][0]["username"].ToString());
+                    }
+                }
+
+                ArrayList idsGroup = new ArrayList();
+                ArrayList namesGroup = new ArrayList();
+
+                foreach (var channelX in channels)
+                {
+                    if (channelX["type"].ToString() != "1")
+                    {
+                        if (channelX["name"].ToString() != "")
+                        {
+                            idsGroup.Add(channelX["id"].ToString());
+                            namesGroup.Add(channelX["name"]); ;
+                        }
+                        else
+                        {
+
+                            String groupName = "";
+                            int membersLength = 0;
+
+                            foreach (var recipient in channelX["recipients"])
+                            {
+                                groupName += $"{recipient["username"]}, ";
+                                membersLength++;
+                            }
+
+                            if (groupName.Length >= 2) 
+                            { 
+                                groupName = groupName.Substring(0, groupName.Length - 2);
+                                if (membersLength <= 1) groupName += " in Group";
+                            }
+
+                            else groupName = "Unnamed";
+
+                            
+                            try
+                            {
+                                idsGroup.Add(channelX["id"].ToString());
+                                namesGroup.Add(groupName);
+                            }
+                            catch
+                            {
+                                idsGroup.Add(channelX["id"].ToString());
+                                namesGroup.Add("Could not generate group name!");
+                            }
+                        }
+                    }
+                }
+
+
+                // Reversing the group hi quick cum
+                idsGroup.Reverse();
+                namesGroup.Reverse();
+
+                ids.AddRange(idsGroup);
+                names.AddRange(namesGroup);
+
+                ArrayList[] values = new ArrayList[2];
+                values[0] = ids;
+                values[1] = names;
+                return values;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;
             }
         }
     }

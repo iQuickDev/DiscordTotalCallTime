@@ -12,6 +12,8 @@ using System.Net.Http;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections;
+using System.Text;
 
 namespace DiscordTotalCallTime
 {
@@ -38,6 +40,13 @@ namespace DiscordTotalCallTime
             closeBtn.Click += close;
             confirmBtn.Click += confirm;
             importJSON.Click += ImportJson;
+            tokenField.TextChanged += UpdateChannelIDsCombo;
+            enterIDManuallyCheckBox.CheckedChanged += enterIDManuallyCheckBoxCheckedChange;
+        }
+
+        protected override void OnLoad(EventArgs e) {
+            String[] placeholder = new String[] { "DM or Group Chat" };
+            chatIDCombo.DataSource = placeholder;
         }
 
         String token, chatId;
@@ -68,7 +77,7 @@ namespace DiscordTotalCallTime
         {
             operationProgress.Value = 0;
             confirmBtn.Enabled = false;
-            await DiscordTotalCallTime.ExportDiscordChatFromID(chatIdField.Text, tokenField.Text, operationProgress);
+            await DiscordTotalCallTime.ExportDiscordChatFromID(chatIdField.Text, tokenField.Text, showOutputCheckBox.Checked, operationProgress);
             confirmBtn.Enabled = true;
             var fileName = jsonFileBrowser.FileName != "" ? jsonFileBrowser.FileName : "messages.json";
 
@@ -87,7 +96,7 @@ namespace DiscordTotalCallTime
             operationProgress.Value = 90;
 
             //Deleting file so nobody can snoop into the messages
-            File.Delete(fileName);
+            if(!keepJSONCheckBox.Checked) File.Delete(fileName);
         }
 
         private void UpdateGUI(double callTime, double iterations)
@@ -113,6 +122,33 @@ namespace DiscordTotalCallTime
             iterations = 0;
         }
 
+        ArrayList IDs;
+        ArrayList Names;
+        private async void UpdateChannelIDsCombo(object sender, EventArgs e)
+        {
+            if (tokenField.Text.StartsWith("\"")) { 
+                StringBuilder stringBuilder = new StringBuilder(tokenField.Text);
+                stringBuilder.Remove(0, 1);
+                tokenField.Text = stringBuilder.ToString();
+            }
+
+            if (tokenField.Text.EndsWith("\""))
+            {
+                StringBuilder stringBuilder = new StringBuilder(tokenField.Text);
+                stringBuilder.Remove(stringBuilder.Length-1, 1);
+                tokenField.Text = stringBuilder.ToString();
+            }
+
+            ArrayList[] IDsandNames = await DiscordTotalCallTime.GetChannelIDs(tokenField.Text);
+            if(IDsandNames != null) { 
+                IDs = IDsandNames[0];
+                Names = IDsandNames[1];
+
+                chatIDCombo.DataSource = Names;
+                chatIDCombo.ForeColor = Color.White;
+            }
+        }
+
         #region window
         private void close(object sender, EventArgs e)
         {
@@ -135,6 +171,18 @@ namespace DiscordTotalCallTime
                 Point p = PointToScreen(e.Location);
                 Location = new Point(p.X - start_point.X, p.Y - start_point.Y);
             }
+        }
+
+        private void chatIDCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(IDs != null) chatIdField.Text = IDs[chatIDCombo.SelectedIndex].ToString();
+        }
+
+        private void enterIDManuallyCheckBoxCheckedChange(object sender, EventArgs e)
+        {
+            var isChecked = enterIDManuallyCheckBox.Checked;
+            chatIDCombo.Visible = !isChecked;
+            chatIdField.Visible = isChecked;
         }
 
         private void msUp(object sender, MouseEventArgs e)

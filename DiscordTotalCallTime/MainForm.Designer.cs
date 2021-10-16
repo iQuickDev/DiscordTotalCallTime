@@ -30,9 +30,9 @@ namespace DiscordTotalCallTime
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dragPanel = new System.Windows.Forms.Panel();
             this.softwareIcon = new System.Windows.Forms.PictureBox();
             this.closeBtn = new Guna.UI2.WinForms.Guna2CircleButton();
@@ -44,6 +44,9 @@ namespace DiscordTotalCallTime
             this.avgCallTimeContainer = new Guna.UI2.WinForms.Guna2GroupBox();
             this.avgCallTime = new System.Windows.Forms.Label();
             this.startedCallsContainer = new Guna.UI2.WinForms.Guna2GroupBox();
+            this.enterIDManuallyCheckBox = new Guna.UI2.WinForms.Guna2ToggleSwitch();
+            this.showOutputCheckBox = new Guna.UI2.WinForms.Guna2ToggleSwitch();
+            this.keepJSONCheckBox = new Guna.UI2.WinForms.Guna2ToggleSwitch();
             this.startedCalls = new Guna.UI2.WinForms.Guna2DataGridView();
             this.user = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.calls = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,12 +54,21 @@ namespace DiscordTotalCallTime
             this.importJSON = new Guna.UI2.WinForms.Guna2Button();
             this.trustLabel = new System.Windows.Forms.Label();
             this.jsonFileBrowser = new System.Windows.Forms.OpenFileDialog();
+            this.chatIDCombo = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
+            this.guna2GroupBox2 = new Guna.UI2.WinForms.Guna2GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.dragPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.softwareIcon)).BeginInit();
             this.totalCallTimeContainer.SuspendLayout();
             this.avgCallTimeContainer.SuspendLayout();
             this.startedCallsContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.startedCalls)).BeginInit();
+            this.guna2GroupBox1.SuspendLayout();
+            this.guna2GroupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dragPanel
@@ -113,7 +125,7 @@ namespace DiscordTotalCallTime
             this.tokenField.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(68)))), ((int)(((byte)(75)))));
             this.tokenField.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tokenField.FocusedState.Parent = this.tokenField;
-            this.tokenField.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tokenField.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.tokenField.ForeColor = System.Drawing.Color.White;
             this.tokenField.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tokenField.HoverState.Parent = this.tokenField;
@@ -145,7 +157,7 @@ namespace DiscordTotalCallTime
             this.chatIdField.ForeColor = System.Drawing.Color.White;
             this.chatIdField.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.chatIdField.HoverState.Parent = this.chatIdField;
-            this.chatIdField.Location = new System.Drawing.Point(344, 53);
+            this.chatIdField.Location = new System.Drawing.Point(343, 53);
             this.chatIdField.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chatIdField.Name = "chatIdField";
             this.chatIdField.PasswordChar = '\0';
@@ -226,7 +238,7 @@ namespace DiscordTotalCallTime
             this.avgCallTimeContainer.Location = new System.Drawing.Point(13, 217);
             this.avgCallTimeContainer.Name = "avgCallTimeContainer";
             this.avgCallTimeContainer.ShadowDecoration.Parent = this.avgCallTimeContainer;
-            this.avgCallTimeContainer.Size = new System.Drawing.Size(272, 79);
+            this.avgCallTimeContainer.Size = new System.Drawing.Size(376, 79);
             this.avgCallTimeContainer.TabIndex = 6;
             this.avgCallTimeContainer.Text = "AVG Call Time";
             this.avgCallTimeContainer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -255,51 +267,108 @@ namespace DiscordTotalCallTime
             this.startedCallsContainer.FillColor = System.Drawing.Color.Transparent;
             this.startedCallsContainer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startedCallsContainer.ForeColor = System.Drawing.Color.White;
-            this.startedCallsContainer.Location = new System.Drawing.Point(428, 118);
+            this.startedCallsContainer.Location = new System.Drawing.Point(406, 118);
             this.startedCallsContainer.Name = "startedCallsContainer";
             this.startedCallsContainer.ShadowDecoration.Parent = this.startedCallsContainer;
-            this.startedCallsContainer.Size = new System.Drawing.Size(161, 220);
+            this.startedCallsContainer.Size = new System.Drawing.Size(180, 178);
             this.startedCallsContainer.TabIndex = 7;
             this.startedCallsContainer.Text = "Started Calls";
             this.startedCallsContainer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.startedCallsContainer.TextOffset = new System.Drawing.Point(0, -5);
             this.startedCallsContainer.UseTransparentBackground = true;
             // 
+            // enterIDManuallyCheckBox
+            // 
+            this.enterIDManuallyCheckBox.Animated = true;
+            this.enterIDManuallyCheckBox.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.enterIDManuallyCheckBox.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.enterIDManuallyCheckBox.CheckedState.InnerBorderColor = System.Drawing.Color.White;
+            this.enterIDManuallyCheckBox.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.enterIDManuallyCheckBox.CheckedState.Parent = this.enterIDManuallyCheckBox;
+            this.enterIDManuallyCheckBox.Location = new System.Drawing.Point(11, 97);
+            this.enterIDManuallyCheckBox.Name = "enterIDManuallyCheckBox";
+            this.enterIDManuallyCheckBox.ShadowDecoration.Parent = this.enterIDManuallyCheckBox;
+            this.enterIDManuallyCheckBox.Size = new System.Drawing.Size(35, 20);
+            this.enterIDManuallyCheckBox.TabIndex = 17;
+            this.enterIDManuallyCheckBox.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.enterIDManuallyCheckBox.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.enterIDManuallyCheckBox.UncheckedState.InnerBorderColor = System.Drawing.Color.White;
+            this.enterIDManuallyCheckBox.UncheckedState.InnerColor = System.Drawing.Color.White;
+            this.enterIDManuallyCheckBox.UncheckedState.Parent = this.enterIDManuallyCheckBox;
+            // 
+            // showOutputCheckBox
+            // 
+            this.showOutputCheckBox.Animated = true;
+            this.showOutputCheckBox.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.showOutputCheckBox.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.showOutputCheckBox.CheckedState.InnerBorderColor = System.Drawing.Color.White;
+            this.showOutputCheckBox.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.showOutputCheckBox.CheckedState.Parent = this.showOutputCheckBox;
+            this.showOutputCheckBox.Location = new System.Drawing.Point(11, 71);
+            this.showOutputCheckBox.Name = "showOutputCheckBox";
+            this.showOutputCheckBox.ShadowDecoration.Parent = this.showOutputCheckBox;
+            this.showOutputCheckBox.Size = new System.Drawing.Size(35, 20);
+            this.showOutputCheckBox.TabIndex = 16;
+            this.showOutputCheckBox.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.showOutputCheckBox.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.showOutputCheckBox.UncheckedState.InnerBorderColor = System.Drawing.Color.White;
+            this.showOutputCheckBox.UncheckedState.InnerColor = System.Drawing.Color.White;
+            this.showOutputCheckBox.UncheckedState.Parent = this.showOutputCheckBox;
+            // 
+            // keepJSONCheckBox
+            // 
+            this.keepJSONCheckBox.Animated = true;
+            this.keepJSONCheckBox.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.keepJSONCheckBox.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.keepJSONCheckBox.CheckedState.InnerBorderColor = System.Drawing.Color.White;
+            this.keepJSONCheckBox.CheckedState.InnerColor = System.Drawing.Color.White;
+            this.keepJSONCheckBox.CheckedState.Parent = this.keepJSONCheckBox;
+            this.keepJSONCheckBox.Location = new System.Drawing.Point(11, 45);
+            this.keepJSONCheckBox.Name = "keepJSONCheckBox";
+            this.keepJSONCheckBox.ShadowDecoration.Parent = this.keepJSONCheckBox;
+            this.keepJSONCheckBox.Size = new System.Drawing.Size(35, 20);
+            this.keepJSONCheckBox.TabIndex = 15;
+            this.keepJSONCheckBox.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.keepJSONCheckBox.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.keepJSONCheckBox.UncheckedState.InnerBorderColor = System.Drawing.Color.White;
+            this.keepJSONCheckBox.UncheckedState.InnerColor = System.Drawing.Color.White;
+            this.keepJSONCheckBox.UncheckedState.Parent = this.keepJSONCheckBox;
+            // 
             // startedCalls
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.startedCalls.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.startedCalls.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.startedCalls.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.startedCalls.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(57)))), ((int)(((byte)(63)))));
             this.startedCalls.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.startedCalls.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.startedCalls.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(57)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.startedCalls.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(57)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.startedCalls.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.startedCalls.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.user,
             this.calls});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(57)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.startedCalls.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(57)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.startedCalls.DefaultCellStyle = dataGridViewCellStyle6;
             this.startedCalls.EnableHeadersVisualStyles = false;
             this.startedCalls.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(57)))), ((int)(((byte)(63)))));
             this.startedCalls.Location = new System.Drawing.Point(3, 34);
             this.startedCalls.Name = "startedCalls";
             this.startedCalls.RowHeadersVisible = false;
             this.startedCalls.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.startedCalls.Size = new System.Drawing.Size(155, 180);
+            this.startedCalls.Size = new System.Drawing.Size(173, 106);
             this.startedCalls.TabIndex = 0;
             this.startedCalls.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.startedCalls.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -376,7 +445,7 @@ namespace DiscordTotalCallTime
             this.importJSON.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.importJSON.ForeColor = System.Drawing.Color.Black;
             this.importJSON.HoverState.Parent = this.importJSON;
-            this.importJSON.Location = new System.Drawing.Point(13, 308);
+            this.importJSON.Location = new System.Drawing.Point(13, 470);
             this.importJSON.Name = "importJSON";
             this.importJSON.ShadowDecoration.Parent = this.importJSON;
             this.importJSON.Size = new System.Drawing.Size(120, 30);
@@ -389,7 +458,7 @@ namespace DiscordTotalCallTime
             this.trustLabel.AutoSize = true;
             this.trustLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.trustLabel.ForeColor = System.Drawing.Color.White;
-            this.trustLabel.Location = new System.Drawing.Point(139, 315);
+            this.trustLabel.Location = new System.Drawing.Point(141, 476);
             this.trustLabel.Name = "trustLabel";
             this.trustLabel.Size = new System.Drawing.Size(171, 15);
             this.trustLabel.TabIndex = 10;
@@ -400,12 +469,126 @@ namespace DiscordTotalCallTime
             this.jsonFileBrowser.FileName = "messages.json";
             this.jsonFileBrowser.Title = "JSON Selector";
             // 
+            // chatIDCombo
+            // 
+            this.chatIDCombo.BackColor = System.Drawing.Color.Transparent;
+            this.chatIDCombo.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(68)))), ((int)(((byte)(75)))));
+            this.chatIDCombo.BorderRadius = 5;
+            this.chatIDCombo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.chatIDCombo.DropDownHeight = 300;
+            this.chatIDCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.chatIDCombo.DropDownWidth = 200;
+            this.chatIDCombo.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(68)))), ((int)(((byte)(75)))));
+            this.chatIDCombo.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.chatIDCombo.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.chatIDCombo.FocusedState.Parent = this.chatIDCombo;
+            this.chatIDCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chatIDCombo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(200)))), ((int)(((byte)(207)))));
+            this.chatIDCombo.HoverState.Parent = this.chatIDCombo;
+            this.chatIDCombo.IntegralHeight = false;
+            this.chatIDCombo.ItemHeight = 34;
+            this.chatIDCombo.ItemsAppearance.Parent = this.chatIDCombo;
+            this.chatIDCombo.Location = new System.Drawing.Point(343, 53);
+            this.chatIDCombo.Name = "chatIDCombo";
+            this.chatIDCombo.ShadowDecoration.Parent = this.chatIDCombo;
+            this.chatIDCombo.Size = new System.Drawing.Size(243, 40);
+            this.chatIDCombo.TabIndex = 11;
+            this.chatIDCombo.SelectedIndexChanged += new System.EventHandler(this.chatIDCombo_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(52, 44);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(118, 21);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Keep Chat File";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(52, 71);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(109, 21);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Debug Mode";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(52, 96);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(128, 21);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Manual Chat ID";
+            // 
+            // guna2GroupBox1
+            // 
+            this.guna2GroupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2GroupBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(68)))), ((int)(((byte)(75)))));
+            this.guna2GroupBox1.BorderRadius = 5;
+            this.guna2GroupBox1.Controls.Add(this.label4);
+            this.guna2GroupBox1.Controls.Add(this.label5);
+            this.guna2GroupBox1.Controls.Add(this.label6);
+            this.guna2GroupBox1.Controls.Add(this.keepJSONCheckBox);
+            this.guna2GroupBox1.Controls.Add(this.enterIDManuallyCheckBox);
+            this.guna2GroupBox1.Controls.Add(this.showOutputCheckBox);
+            this.guna2GroupBox1.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(68)))), ((int)(((byte)(75)))));
+            this.guna2GroupBox1.CustomBorderThickness = new System.Windows.Forms.Padding(0, 30, 0, 0);
+            this.guna2GroupBox1.FillColor = System.Drawing.Color.Transparent;
+            this.guna2GroupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2GroupBox1.ForeColor = System.Drawing.Color.White;
+            this.guna2GroupBox1.Location = new System.Drawing.Point(409, 315);
+            this.guna2GroupBox1.Name = "guna2GroupBox1";
+            this.guna2GroupBox1.ShadowDecoration.Parent = this.guna2GroupBox1;
+            this.guna2GroupBox1.Size = new System.Drawing.Size(177, 185);
+            this.guna2GroupBox1.TabIndex = 21;
+            this.guna2GroupBox1.Text = "Options";
+            this.guna2GroupBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.guna2GroupBox1.TextOffset = new System.Drawing.Point(0, -5);
+            this.guna2GroupBox1.UseTransparentBackground = true;
+            // 
+            // guna2GroupBox2
+            // 
+            this.guna2GroupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.guna2GroupBox2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(68)))), ((int)(((byte)(75)))));
+            this.guna2GroupBox2.BorderRadius = 5;
+            this.guna2GroupBox2.Controls.Add(this.label7);
+            this.guna2GroupBox2.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(68)))), ((int)(((byte)(75)))));
+            this.guna2GroupBox2.CustomBorderThickness = new System.Windows.Forms.Padding(0, 30, 0, 0);
+            this.guna2GroupBox2.FillColor = System.Drawing.Color.Transparent;
+            this.guna2GroupBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2GroupBox2.ForeColor = System.Drawing.Color.White;
+            this.guna2GroupBox2.Location = new System.Drawing.Point(13, 315);
+            this.guna2GroupBox2.Name = "guna2GroupBox2";
+            this.guna2GroupBox2.ShadowDecoration.Parent = this.guna2GroupBox2;
+            this.guna2GroupBox2.Size = new System.Drawing.Size(376, 149);
+            this.guna2GroupBox2.TabIndex = 7;
+            this.guna2GroupBox2.Text = "Advanced Info";
+            this.guna2GroupBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.guna2GroupBox2.TextOffset = new System.Drawing.Point(0, -5);
+            this.guna2GroupBox2.UseTransparentBackground = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.label7.Location = new System.Drawing.Point(38, 44);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(195, 19);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "0 hours 0 minutes 0 seconds";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(57)))), ((int)(((byte)(63)))));
-            this.ClientSize = new System.Drawing.Size(600, 350);
+            this.ClientSize = new System.Drawing.Size(602, 512);
+            this.Controls.Add(this.guna2GroupBox2);
+            this.Controls.Add(this.guna2GroupBox1);
+            this.Controls.Add(this.chatIDCombo);
             this.Controls.Add(this.trustLabel);
             this.Controls.Add(this.importJSON);
             this.Controls.Add(this.startedCallsContainer);
@@ -429,6 +612,10 @@ namespace DiscordTotalCallTime
             this.avgCallTimeContainer.PerformLayout();
             this.startedCallsContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.startedCalls)).EndInit();
+            this.guna2GroupBox1.ResumeLayout(false);
+            this.guna2GroupBox1.PerformLayout();
+            this.guna2GroupBox2.ResumeLayout(false);
+            this.guna2GroupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -454,6 +641,16 @@ namespace DiscordTotalCallTime
         private System.Windows.Forms.PictureBox softwareIcon;
         private System.Windows.Forms.Label trustLabel;
         private System.Windows.Forms.OpenFileDialog jsonFileBrowser;
+        private Guna.UI2.WinForms.Guna2ComboBox chatIDCombo;
+        private Guna.UI2.WinForms.Guna2ToggleSwitch enterIDManuallyCheckBox;
+        private Guna.UI2.WinForms.Guna2ToggleSwitch showOutputCheckBox;
+        private Guna.UI2.WinForms.Guna2ToggleSwitch keepJSONCheckBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox1;
+        private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox2;
+        private System.Windows.Forms.Label label7;
     }
 }
 
